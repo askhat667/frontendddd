@@ -34,27 +34,44 @@ memberRows.forEach(row => {
 
 // ID бойынша табу және мәтінді өзгерту
 const task1Element = document.getElementById("task1Element");
-task1Element.textContent = "Сәлем, әлем!";
-
-// Жаңа div жасау және body-ға қосу
-const newDiv = document.createElement("div");
-newDiv.className = "new-div task-box";
-newDiv.textContent = "Мен жаңа элементпін";
-document.getElementById("task1Result").append(newDiv);
+task1Element.textContent = "Салем алем";
+task1Element.addEventListener("click", function() {
+  task1Element.textContent =
+    task1Element.textContent === "Салем алем" ? "Ескі мәтін" : "Салем алем";
+});
 
 // old-element класындағы элементті өшіру
 const oldElement = document.querySelector(".old-element");
 oldElement.remove();
 
+// Жаңа элементті қосу және өшіру
+const toggleTask1Element = document.getElementById("toggleTask1Element");
+const task1Result = document.getElementById("task1Result");
+let addedElement = null;
+
+toggleTask1Element.addEventListener("click", function() {
+  if (addedElement) {
+    addedElement.remove();
+    addedElement = null;
+    toggleTask1Element.textContent = "Жаңа элемент қосу";
+    return;
+  }
+
+  addedElement = document.createElement("div");
+  addedElement.className = "task-box";
+  addedElement.textContent = "Мен жаңа элементпін";
+  task1Result.append(addedElement);
+  toggleTask1Element.textContent = "Элемент өшіру";
+});
+
 // Жаңа p жасау
 const newParagraph = document.createElement("p");
 newParagraph.textContent = "Бұл ауыспалы абзац";
-document.getElementById("task1Result").append(newParagraph);
+task1Result.append(newParagraph);
 
 // Абзацты басқанда түсі мен қаріп өлшемін өзгерту
 newParagraph.addEventListener("click", function() {
-  newParagraph.style.color = "red";
-  newParagraph.style.fontSize = "25px";
+  newParagraph.classList.toggle("highlighted-paragraph");
 });
 
 /* =========================
