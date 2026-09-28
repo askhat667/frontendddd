@@ -419,6 +419,18 @@ button{
   margin-top:10px;
 }
 
+.task1-actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid var(--border);
+}
+
+.task1-actions .task-button{
+  margin-top:0;
+}
+
 .task-button:hover{
   background:var(--primary-dark);
 }
