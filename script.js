@@ -123,8 +123,41 @@ showClasses();
 const tableForm = document.getElementById("tableForm");
 const tableContainer = document.getElementById("tableContainer");
 const cellColor = document.getElementById("cellColor");
-const countCellsButton = document.getElementById("countCells");
 const cellCountResult = document.getElementById("cellCountResult");
+
+function getContrastingTextColor(hexColor) {
+  const red = parseInt(hexColor.slice(1, 3), 16);
+  const green = parseInt(hexColor.slice(3, 5), 16);
+  const blue = parseInt(hexColor.slice(5, 7), 16);
+  const brightness = (red * 299 + green * 587 + blue * 114) / 1000;
+  return brightness >= 150 ? "#1e293b" : "#ffffff";
+}
+
+function renderCellCounts() {
+  const counts = new Map([[cellColor.value, 0]]);
+
+  tableContainer.querySelectorAll("td[data-color]").forEach(cell => {
+    const color = cell.dataset.color;
+    if (color) counts.set(color, (counts.get(color) || 0) + 1);
+  });
+
+  cellCountResult.replaceChildren();
+  counts.forEach((count, color) => {
+    const item = document.createElement("div");
+    item.className = "cell-count";
+
+    const swatch = document.createElement("span");
+    swatch.className = "cell-count-swatch";
+    swatch.style.backgroundColor = color;
+    swatch.setAttribute("aria-hidden", "true");
+
+    const label = document.createElement("span");
+    label.textContent = `${color.toUpperCase()}: ${count} ұяшық`;
+
+    item.append(swatch, label);
+    cellCountResult.append(item);
+  });
+}
 
 function createTable(rowCount, columnCount) {
   const table = document.createElement("table");
@@ -141,17 +174,14 @@ function createTable(rowCount, columnCount) {
         const isSelectedColor = cell.dataset.color === cellColor.value;
         cell.dataset.color = isSelectedColor ? "" : cellColor.value;
         cell.style.backgroundColor = isSelectedColor ? "" : cellColor.value;
+        cell.style.color = isSelectedColor ? "" : getContrastingTextColor(cellColor.value);
+        renderCellCounts();
       });
     }
   }
 
   tableContainer.replaceChildren(table);
-  cellCountResult.textContent = "Кесте дайын. Ұяшықтарды басып бояңыз.";
-}
-
-function countCellsByColor(color) {
-  const cells = tableContainer.querySelectorAll("td");
-  return [...cells].filter(cell => cell.dataset.color === color).length;
+  renderCellCounts();
 }
 
 tableForm.addEventListener("submit", function(event) {
@@ -159,10 +189,7 @@ tableForm.addEventListener("submit", function(event) {
   createTable(Number(document.getElementById("rowCount").value), Number(document.getElementById("columnCount").value));
 });
 
-countCellsButton.addEventListener("click", function() {
-  const count = countCellsByColor(cellColor.value);
-  cellCountResult.textContent = `Таңдалған түстегі ұяшық саны: ${count}`;
-});
+cellColor.addEventListener("input", renderCellCounts);
 
 createTable(4, 5);
 

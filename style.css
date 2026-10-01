@@ -162,6 +162,7 @@ button{
   width:100%;
   border:1px solid var(--border);
   background:var(--surface);
+  color:var(--text);
   border-radius:19px;
   padding:17px;
   display:flex;
@@ -515,8 +516,13 @@ button{
   padding:8px 10px;
   border:1px solid var(--border);
   border-radius:9px;
+  background:var(--surface);
   color:var(--text);
   font:inherit;
+}
+
+body.dark-theme .table-controls input{
+  color-scheme:dark;
 }
 
 .table-controls .task-button,
@@ -550,7 +556,8 @@ button{
   height:54px;
   padding:8px;
   border:1px solid var(--border);
-  background:#fff;
+  background:var(--surface-muted);
+  color:var(--text);
   text-align:center;
   cursor:pointer;
   transition:background-color .15s ease;
@@ -558,6 +565,37 @@ button{
 
 .color-table td:hover{
   box-shadow:inset 0 0 0 2px var(--primary);
+}
+
+.cell-counts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.cell-counts:empty{
+  display:none;
+}
+
+.cell-count{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 11px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--surface-muted);
+  color:var(--text);
+  font-weight:600;
+}
+
+.cell-count-swatch{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  border:1px solid var(--border);
+  border-radius:50%;
 }
 
 #classElement.active{
