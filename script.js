@@ -8,6 +8,25 @@ const views = {
 
 const navTabs = document.querySelectorAll(".nav-tab");
 const memberRows = document.querySelectorAll(".member-row");
+const themeToggle = document.getElementById("themeToggle");
+
+function setTheme(isDark) {
+  document.body.classList.toggle("dark-theme", isDark);
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.setAttribute(
+    "aria-label",
+    isDark ? "Ашық тақырыпты қосу" : "Қараңғы тақырыпты қосу"
+  );
+  themeToggle.querySelector(".theme-icon").textContent = isDark ? "☀" : "☾";
+}
+
+setTheme(localStorage.getItem("dark-theme") === "true");
+
+themeToggle.addEventListener("click", () => {
+  const isDark = !document.body.classList.contains("dark-theme");
+  setTheme(isDark);
+  localStorage.setItem("dark-theme", String(isDark));
+});
 
 function openView(name) {
   Object.values(views).forEach(view => view.classList.remove("active-view"));
