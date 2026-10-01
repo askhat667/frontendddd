@@ -3,7 +3,8 @@ const views = {
   askhat: document.getElementById("askhatView"),
   erasyl: document.getElementById("erasylView"),
   task1: document.getElementById("task1View"),
-  task2: document.getElementById("task2View")
+  task2: document.getElementById("task2View"),
+  task3: document.getElementById("task3View")
 };
 
 const navTabs = document.querySelectorAll(".nav-tab");
@@ -95,6 +96,56 @@ toggleActive.addEventListener("click", function() {
 });
 
 showClasses();
+
+/* =========================
+   3-ТАПСЫРМА
+   ========================= */
+
+const tableForm = document.getElementById("tableForm");
+const tableContainer = document.getElementById("tableContainer");
+const cellColor = document.getElementById("cellColor");
+const countCellsButton = document.getElementById("countCells");
+const cellCountResult = document.getElementById("cellCountResult");
+
+function createTable(rowCount, columnCount) {
+  const table = document.createElement("table");
+  table.className = "color-table";
+  const tableBody = table.createTBody();
+
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+    const row = tableBody.insertRow();
+
+    for (let columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+      const cell = row.insertCell();
+      cell.textContent = `${rowIndex + 1}:${columnIndex + 1}`;
+      cell.addEventListener("click", function() {
+        const isSelectedColor = cell.dataset.color === cellColor.value;
+        cell.dataset.color = isSelectedColor ? "" : cellColor.value;
+        cell.style.backgroundColor = isSelectedColor ? "" : cellColor.value;
+      });
+    }
+  }
+
+  tableContainer.replaceChildren(table);
+  cellCountResult.textContent = "Кесте дайын. Ұяшықтарды басып бояңыз.";
+}
+
+function countCellsByColor(color) {
+  const cells = tableContainer.querySelectorAll("td");
+  return [...cells].filter(cell => cell.dataset.color === color).length;
+}
+
+tableForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+  createTable(Number(document.getElementById("rowCount").value), Number(document.getElementById("columnCount").value));
+});
+
+countCellsButton.addEventListener("click", function() {
+  const count = countCellsByColor(cellColor.value);
+  cellCountResult.textContent = `Таңдалған түстегі ұяшық саны: ${count}`;
+});
+
+createTable(4, 5);
 
 
 /* =========================

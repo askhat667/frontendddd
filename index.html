@@ -215,6 +215,39 @@
     </div>
   </section>
 
+  <!-- 3 ТАПСЫРМА -->
+  <section id="task3View" class="view">
+    <div class="section-title">
+      <span>JavaScript</span>
+      <h2>3 тапсырма</h2>
+      <p>Кесте құрып, ұяшықтарды бояңыз және таңдалған түстегі ұяшықтарды санаңыз.</p>
+    </div>
+
+    <div class="task-card">
+      <h3>Кесте құрастыру</h3>
+      <form id="tableForm" class="table-controls">
+        <label>
+          Жол саны
+          <input id="rowCount" type="number" min="1" max="20" value="4" required>
+        </label>
+        <label>
+          Баған саны
+          <input id="columnCount" type="number" min="1" max="20" value="5" required>
+        </label>
+        <button class="task-button" type="submit">Кесте құру</button>
+      </form>
+
+      <div class="color-controls">
+        <label for="cellColor">Ұяшық түсі</label>
+        <input id="cellColor" type="color" value="#f4a261">
+        <button id="countCells" class="task-button" type="button">Түсті ұяшықтарды санау</button>
+      </div>
+
+      <p id="cellCountResult" class="class-output" aria-live="polite"></p>
+      <div id="tableContainer" class="table-container"></div>
+    </div>
+  </section>
+
 </main>
 
 <!-- НИЖНИЕ ВКЛАДКИ -->
@@ -241,6 +274,10 @@
   <button class="nav-tab" data-view="task2" type="button">
     <span class="nav-icon">2</span>
     <span>2 тапсырма</span>
+  </button>
+  <button class="nav-tab" data-view="task3" type="button">
+    <span class="nav-icon">3</span>
+    <span>3 тапсырма</span>
   </button>
 </nav>
 
