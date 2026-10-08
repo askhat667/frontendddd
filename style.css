@@ -656,6 +656,12 @@ body.dark-theme .table-controls input{
   color:#fff;
 }
 
+.todo-count{
+  margin-top:12px;
+  color:var(--muted);
+  font-weight:700;
+}
+
 .add-todo-form{
   display:grid;
   gap:8px;

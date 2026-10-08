@@ -203,6 +203,7 @@ createTable(4, 5);
 
 const todosStatus = document.getElementById("todosStatus");
 const todosList = document.getElementById("todosList");
+const todoCount = document.getElementById("todoCount");
 const reloadTodosButton = document.getElementById("reloadTodosButton");
 const toggleAddTodoButton = document.getElementById("toggleAddTodoButton");
 const addTodoForm = document.getElementById("addTodoForm");
@@ -235,6 +236,10 @@ function updateTodoFilters() {
 
 function renderTodos() {
   todosList.replaceChildren();
+
+  const completedCount = todos.filter(todo => todo.completed).length;
+  todoCount.textContent = `Всего задач: ${todos.length} · выполнено: ${completedCount} · осталось: ${todos.length - completedCount}`;
+  todoCount.hidden = !todosLoaded;
 
   const visibleTodos = todos.filter(todo => {
     if (activeTodoFilter === "completed") return todo.completed;
