@@ -251,6 +251,46 @@
     </div>
   </section>
 
+  <!-- API ТАПСЫРМАСЫ -->
+  <section id="apiView" class="view">
+    <div class="section-title">
+      <span>External REST API</span>
+      <h2>API тапсырмасы</h2>
+      <p>DummyJSON API-ден алынған тапсырмалар.</p>
+    </div>
+
+    <div class="task-card api-card">
+      <div class="api-header">
+        <h3>Список задач</h3>
+        <div class="api-actions">
+          <button id="toggleAddTodoButton" class="task-button" type="button" aria-controls="addTodoForm" aria-expanded="false">
+            + Добавить задачу
+          </button>
+          <button id="reloadTodosButton" class="task-button" type="button">
+            Обновить список
+          </button>
+        </div>
+      </div>
+      <div class="todo-filters" role="group" aria-label="Фильтр задач">
+        <button class="todo-filter active" data-filter="all" type="button" aria-pressed="true">Все задачи</button>
+        <button class="todo-filter" data-filter="completed" type="button" aria-pressed="false">Выполненные</button>
+        <button class="todo-filter" data-filter="incomplete" type="button" aria-pressed="false">Невыполненные</button>
+      </div>
+      <form id="addTodoForm" class="add-todo-form" hidden>
+        <label for="newTodoInput">Введите новую задачу:</label>
+        <div class="add-todo-controls">
+          <input id="newTodoInput" type="text" maxlength="120" required>
+          <button id="addTodoSubmit" class="task-button" type="submit">Добавить</button>
+        </div>
+      </form>
+      <p class="api-note">DummyJSON имитирует запись: POST и PATCH не сохраняют изменения навсегда. Обновление загрузит исходный список.</p>
+      <p id="todosStatus" class="api-status" role="status" aria-live="polite">
+        Задачи загружаются при открытии вкладки.
+      </p>
+      <ol id="todosList" class="todo-list"></ol>
+    </div>
+  </section>
+
 </main>
 
 <!-- НИЖНИЕ ВКЛАДКИ -->
@@ -281,6 +321,10 @@
   <button class="nav-tab" data-view="task3" type="button">
     <span class="nav-icon">3</span>
     <span>3 тапсырма</span>
+  </button>
+  <button class="nav-tab" data-view="api" type="button">
+    <span class="nav-icon">API</span>
+    <span>API</span>
   </button>
 </nav>
 
